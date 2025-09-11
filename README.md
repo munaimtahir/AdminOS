@@ -30,7 +30,7 @@ A digital cupboard for lab offices.
 
 2.  **Seed the database with sample data:**
     ```bash
-    python manage.py seed
+    python manage.py seed_data
     ```
 
 3.  **Run the development server:**
