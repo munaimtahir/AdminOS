@@ -21,7 +21,7 @@
                         <td>{{ page.register.name }}</td>
                         <td>{{ page.date|date:"Y-m-d" }}</td>
                         <td>
-                            {% if page.temperature_logs.all or page.calibration_logs.all or page.waste_logs.all %}
+                            {% if page.is_complete %}
                                 <span style="color: green;">Complete</span>
                             {% else %}
                                 <span style="color: orange;">Pending</span>
