@@ -46,6 +46,21 @@ To run the test suite, use `pytest`:
 pytest
 ```
 
-## Endpoints
+## Application Pages
 
-- `/health/`: Returns a JSON response with the status of the application.
+The following pages are available:
+
+-   **/ (Dashboard)
+    -   Shows the status of all register pages for the current day.
+-   **/registers/
+    -   Lists all available registers and provides a link to the current day's page for each.
+-   **/bundles/daily/
+    -   A bundle view showing all register pages for the current day.
+-   **/bundles/weekly/
+    -   A bundle view showing all register pages for the current week (Monday to Sunday).
+-   **/bundles/pending/
+    -   A bundle view showing all register pages that are overdue or due today.
+-   **/admin/
+    -   The Django admin interface for managing all data models.
+-   **/health/
+    -   A health check endpoint that returns a JSON response with the status of the application.

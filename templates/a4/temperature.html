@@ -1,16 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Temperature Log</title>
-    <style>
-        body { font-family: sans-serif; }
-        h1 { text-align: center; }
-    </style>
-</head>
-<body>
-    <h1>Temperature Log</h1>
-    <p>Date: {{ page.date }}</p>
-    <!-- Temperature log content will go here -->
-</body>
-</html>
+<table class="a4-table">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Temperature (°C)</th>
+            <th>Initials</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+            <tr>
+                <td>{{ log.time|time:"H:i" }}</td>
+                <td>{{ log.location }}</td>
+                <td>{{ log.temperature }}</td>
+                <td>{{ log.initials }}</td>
+                <td>{{ log.remarks|default:"" }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">No temperature logs recorded for this day.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<style>
+    .a4-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    .a4-table th, .a4-table td { border: 1px solid #333; padding: 8px; text-align: left; }
+    .a4-table th { background-color: #eee; }
+</style>
