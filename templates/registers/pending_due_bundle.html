@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Pending & Due Bundle{% endblock %}
+
+{% block content %}
+    <h2>Pending & Due Bundle</h2>
+    <p>This bundle shows all register pages that are overdue or due today.</p>
+
+    {% include "registers/includes/page_list.html" with pages=register_pages %}
+{% endblock %}
