@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}All Registers{% endblock %}
+
+{% block content %}
+    <h2>All Registers</h2>
+    <p>Choose a register to view its page for today ({{ today|date:"Y-m-d" }}).</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Register Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for register in registers %}
+                <tr>
+                    <td>{{ register.name }}</td>
+                    <td>
+                        <a href="{% url 'register_date_detail' register_id=register.id year=today.year month=today.month day=today.day %}">
+                            View Today's Page
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">No registers found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p style="margin-top: 1rem;">
+        <strong>Note:</strong> The date chooser functionality will be added in a future update.
+    </p>
+{% endblock %}

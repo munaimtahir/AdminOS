@@ -9,30 +9,33 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
-import os
 from pathlib import Path
+import os
 from dotenv import load_dotenv
+from django.core.exceptions import ImproperlyConfigured
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(BASE_DIR / '.env')
+# Load .env from project root (same folder as manage.py)
+load_dotenv(BASE_DIR / ".env")
+
+# --- Core ---
+SECRET_KEY = os.getenv("SECRET_KEY", "")
+if not SECRET_KEY:
+    # Keep this strict in base settings; dev_settings will override for local dev
+    raise ImproperlyConfigured("The SECRET_KEY setting must not be empty.")
+
+DEBUG = os.getenv("DEBUG", "0") == "1"
+
+# Comma-separated list in .env, e.g. "172.235.33.181,127.0.0.1,localhost"
+ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") if h.strip()]
+
+# Optional: comma-separated list, e.g. "http://172.235.33.181:8001"
+_csrf = os.getenv("CSRF_TRUSTED_ORIGINS", "")
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in _csrf.split(",") if o.strip()]
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-g1%kd3ek4$bur6fdoh2uy10bqux^ph_4=kk61bvw+%qa)ie9u9")
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
+# --- Application definition ---
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -74,9 +77,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "adminos_lab.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# --- Database ---
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -85,9 +86,7 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
+# --- Password validation ---
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -104,24 +103,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
+# --- Internationalization ---
 LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = os.getenv("TIME_ZONE", "UTC")
-
+TIME_ZONE = os.getenv("TIMEZONE", "Asia/Karachi")
 USE_I18N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
+# --- Static files ---
 STATIC_URL = "static/"
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
+# --- Default primary key field type ---
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
