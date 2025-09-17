@@ -9,7 +9,7 @@ def test_health_check_returns_200(client):
     """
     Tests that the health check endpoint returns a 200 status code.
     """
-    url = reverse('registers:health_check')
+    url = reverse('health_check')
     response = client.get(url)
     assert response.status_code == 200
     assert response.json() == {'status': 'ok'}

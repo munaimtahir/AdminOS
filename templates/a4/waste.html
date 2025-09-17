@@ -1,41 +1,16 @@
-<table class="a4-table">
-    <thead>
-        <tr>
-            <th>Time</th>
-            <th>Yellow Bags (#)</th>
-            <th>Yellow Bags (Weight)</th>
-            <th>Yellow Bags Labeled</th>
-            <th>Sharps Cont. (#)</th>
-            <th>Sharps Cont. (Weight)</th>
-            <th>Sharps Cont. Labeled</th>
-            <th>Handed Over By</th>
-            <th>Vehicle No.</th>
-            <th>Receiver Signature</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for log in logs %}
-            <tr>
-                <td>{{ log.time|time:"H:i" }}</td>
-                <td>{{ log.yellow_bags_no }}</td>
-                <td>{{ log.yellow_bags_weight }}</td>
-                <td>{% if log.yellow_bags_labeled %}Yes{% else %}No{% endif %}</td>
-                <td>{{ log.sharps_containers_no }}</td>
-                <td>{{ log.sharps_containers_weight }}</td>
-                <td>{% if log.sharps_containers_labeled %}Yes{% else %}No{% endif %}</td>
-                <td>{{ log.handed_over_by }}</td>
-                <td>{{ log.vehicle_no }}</td>
-                <td>{{ log.receiver_signature }}</td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="10">No waste logs recorded for this day.</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<style>
-    .a4-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    .a4-table th, .a4-table td { border: 1px solid #333; padding: 8px; text-align: left; }
-    .a4-table th { background-color: #eee; }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waste Log</title>
+    <style>
+        body { font-family: sans-serif; }
+        h1 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Waste Log</h1>
+    <p>Date: {{ page.date }}</p>
+    <!-- Waste log content will go here -->
+</body>
+</html>

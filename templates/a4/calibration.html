@@ -1,37 +1,16 @@
-<table class="a4-table">
-    <thead>
-        <tr>
-            <th>Equipment Name</th>
-            <th>Serial No.</th>
-            <th>Standard Used</th>
-            <th>Result</th>
-            <th>Tolerance</th>
-            <th>Calibrated By</th>
-            <th>Verified By</th>
-            <th>Remarks</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for log in logs %}
-            <tr>
-                <td>{{ log.equipment_name }}</td>
-                <td>{{ log.serial_no }}</td>
-                <td>{{ log.standard_used }}</td>
-                <td>{{ log.result }}</td>
-                <td>{{ log.tolerance }}</td>
-                <td>{{ log.calibrated_by }}</td>
-                <td>{{ log.verified_by }}</td>
-                <td>{{ log.remarks|default:"" }}</td>
-            </tr>
-        {% empty %}
-            <tr>
-                <td colspan="8">No calibration logs recorded for this day.</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<style>
-    .a4-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    .a4-table th, .a4-table td { border: 1px solid #333; padding: 8px; text-align: left; }
-    .a4-table th { background-color: #eee; }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calibration Log</title>
+    <style>
+        body { font-family: sans-serif; }
+        h1 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>Calibration Log</h1>
+    <p>Date: {{ page.date }}</p>
+    <!-- Calibration log content will go here -->
+</body>
+</html>
